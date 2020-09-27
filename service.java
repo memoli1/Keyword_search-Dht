@@ -138,6 +138,25 @@ private static void fix_nodes(List<NodeDht> nodelist) {
         System.out.println("Creo un ipercubo a 8 dimensioni");
         System.out.println("Le parole chiave disponibili sono: { a, b, c, d, e, f, g, h }");
         int r = 8;
+				while(true){
+
+					String command = input.readLine();
+					String option = command.split(",")[0]; //insert,query,delete,join,depart
+						if (option.equals("insert") || option.equals("delete") || option.equals("query")) {
+								int len = nodelist.size();
+
+								int randomNum = ThreadLocalRandom.current().nextInt(0, len-1);
+								NodeDht init = nodelist.get(randomNum);
+								main_forward_to(command + "-" + init.getMyname()+"-"+ init.getmyPort()+"\n", k, init.getMyname(), init.getmyPort());
+								System.out.println("Main says: I forwarded the command to Node with ID: " + init.getmyId());
+								try {
+									Thread.sleep(5000);
+										} catch (InterruptedException e) {
+											System.out.println("Main couldn't sleep!");
+										}
+
+							}
+					}
 
         //creo l'ipercubo di r-dimensioni
         Hypercube hypercube = new Hypercube(r);
