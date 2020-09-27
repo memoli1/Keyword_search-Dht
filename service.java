@@ -131,6 +131,35 @@ private static void fix_nodes(List<NodeDht> nodelist) {
 			    System.out.println("Main couldn't sleep!");
 		    }
 
+					String command;
+					try {
+						do {
+						System.out.println("Insert somenthing in the network:");
+						command = input.readLine();
+						System.out.println("Type your command: ");
+						String option = command.split(",")[0]; //insert,query,delete,join,depart
+						if (option.equals("insert") || option.equals("delete") || option.equals("query")) {
+							int len = nodelist.size();
+
+							int randomNum = ThreadLocalRandom.current().nextInt(0, len-1);
+							NodeDht init = nodelist.get(randomNum);
+							main_forward_to(command + "-" + init.getMyname()+"-"+ init.getmyPort()+"\n", k, init.getMyname(), init.getmyPort());
+							System.out.println("Main says: I forwarded the command to Node with ID: " + init.getmyId());
+
+							try {
+								Thread.sleep(5000);
+							} catch (InterruptedException e) {
+								System.out.println("Main couldn't sleep!");
+							}
+
+						}
+					}  while(!(command.equals("stop")));
+					} catch (IOException e) {
+		        System.out.println("Errore nell'inserimento");
+					}
+
+
+
         /*System.out.println("Inserisci le dimensione dell'ipercubo:");
         Scanner scanner = new Scanner(System. in);
         int r=scanner.nextInt();*/
@@ -138,25 +167,6 @@ private static void fix_nodes(List<NodeDht> nodelist) {
         System.out.println("Creo un ipercubo a 8 dimensioni");
         System.out.println("Le parole chiave disponibili sono: { a, b, c, d, e, f, g, h }");
         int r = 8;
-				while(true){
-
-					String command = input.readLine();
-					String option = command.split(",")[0]; //insert,query,delete,join,depart
-						if (option.equals("insert") || option.equals("delete") || option.equals("query")) {
-								int len = nodelist.size();
-
-								int randomNum = ThreadLocalRandom.current().nextInt(0, len-1);
-								NodeDht init = nodelist.get(randomNum);
-								main_forward_to(command + "-" + init.getMyname()+"-"+ init.getmyPort()+"\n", k, init.getMyname(), init.getmyPort());
-								System.out.println("Main says: I forwarded the command to Node with ID: " + init.getmyId());
-								try {
-									Thread.sleep(5000);
-										} catch (InterruptedException e) {
-											System.out.println("Main couldn't sleep!");
-										}
-
-							}
-					}
 
         //creo l'ipercubo di r-dimensioni
         Hypercube hypercube = new Hypercube(r);
@@ -166,12 +176,12 @@ private static void fix_nodes(List<NodeDht> nodelist) {
         connectedNode = hypercube.getNode(randomNode(r));
 
         printLog(hypercube, connectedNode);
-        loadCsv(hypercube, connectedNode);
+        //loadCsv(hypercube, connectedNode);
         String choice;
 
         do{
             System.out.println("\n****MENU****");
-			      System.out.println("1. INSERT");
+			    //  System.out.println("1. INSERT");
 			      System.out.println("2. SUPERSET SEARCH");
       			System.out.println("3. PIN SEARCH");
 			      System.out.println("4. DELETE");
@@ -183,8 +193,8 @@ private static void fix_nodes(List<NodeDht> nodelist) {
             switch(choice){
 
 
-                case "1": insert(hypercube, connectedNode);
-                break;
+              //  case "1": insert(hypercube, connectedNode);
+              //  break;
 
                 case "2": search(hypercube, connectedNode, r);
                 break;
@@ -263,17 +273,17 @@ private static void fix_nodes(List<NodeDht> nodelist) {
         }
     }
 
-    private static void insert(Hypercube hypercube, Node connectedNode){
-
-        System.out.print("1. INSERT: ");
-
-        Set<String> key = new HashSet<String>(insertKeywords());
-
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Inserisci il contenuto dell'oggetto");
-        String valueObject  = scan.nextLine();
-        connectedNode.addObject(hypercube, key, valueObject);
-    }
+    // private static void insert(Hypercube hypercube, Node connectedNode){
+		//
+    //     System.out.print("1. INSERT: ");
+		//
+    //     Set<String> key = new HashSet<String>(insertKeywords());
+		//
+    //     Scanner scan = new Scanner(System.in);
+    //     System.out.println("Inserisci il contenuto dell'oggetto");
+    //     String valueObject  = scan.nextLine();
+    //     connectedNode.addObject(hypercube, key, valueObject);
+    // }
 
 
     private static Set<String> insertKeywords(){
