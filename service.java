@@ -134,9 +134,9 @@ private static void fix_nodes(List<NodeDht> nodelist) {
 					String command;
 					try {
 						do {
-						System.out.println("Insert somenthing in the network:");
+						System.out.println("Insert somenthing in the network and then type stop :");
 						command = input.readLine();
-						System.out.println("Type your command: ");
+					//	System.out.println("Type your command: ");
 						String option = command.split(",")[0]; //insert,query,delete,join,depart
 						if (option.equals("insert") || option.equals("delete") || option.equals("query")) {
 							int len = nodelist.size();
