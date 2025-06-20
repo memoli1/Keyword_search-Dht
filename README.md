@@ -1,11 +1,11 @@
+Simulate search through a set of keywords
 
-Simulazione ricerca attraverso un set di keyword
+Compile all files and run service.java
 
-Compilare tutti i file ed eseguire service.java
+The application initially creates a network of distributed hashes; it is asked to insert objects into it.
 
-L'applicazione inizialmente crea una rete di hash distribuite, viene chiesto di inserire degli oggetti al suo interno.
+A typical example of insertion: “insert,Something,302.” To end the insertion, type “stop.”
 
-Un tipico esempio di inserimento: "insert,Something,302".
-Per terminare l'inserimento digitare "stop".
+Next, a hypercube is created to index the information and optimize the search. The hypercube and the Dht do not yet have a real connection, the mapping between the keyword set and the nodes responsible for the object is missing.
 
-Successivamente viene creato un ipercubo per indicizzare le informazioni e ottimizzare la ricerca. L'ipercubo e la Dht non hanno ancora un vero collegamento, manca il mapping tra il set di keyword e i nodi responsabili dell'oggetto.
+Translated with DeepL.com (free version)
